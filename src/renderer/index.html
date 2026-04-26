@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Tech Radar</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">AI</span>
+          <strong>Tech Radar <small>v1.0</small></strong>
+        </div>
+        <nav class="view-switch" aria-label="视图切换">
+          <button class="view-button active" data-view="radar">雷达</button>
+          <button class="view-button" data-view="favorites">收藏</button>
+        </nav>
+        <div class="sidebar-note" data-view="favorites" role="button" tabindex="0" aria-label="打开收藏库">
+          <span>收藏库</span>
+          <strong id="favoriteCount">0</strong>
+        </div>
+        <div class="maker">Made by <strong>SmashDreams</strong></div>
+      </aside>
+
+      <section class="workspace">
+      <header class="topbar">
+        <div>
+          <h1>AI Tech Radar</h1>
+          <p id="statusText">v1.0 · 准备启动技术雷达</p>
+        </div>
+        <div class="actions">
+          <button id="refreshButton" class="primary">刷新</button>
+          <button id="settingsButton" class="secondary">设置</button>
+        </div>
+      </header>
+
+      <section class="stats" aria-label="概览">
+        <div>
+          <span>信息量</span>
+          <strong id="itemCount">0</strong>
+        </div>
+        <div>
+          <span>排序模式</span>
+          <strong id="rankingModeLabel">均衡</strong>
+        </div>
+        <div>
+          <span>DeepSeek</span>
+          <strong id="modelName">未配置</strong>
+        </div>
+        <div>
+          <span>上次刷新</span>
+          <strong id="lastRefresh">尚未刷新</strong>
+        </div>
+      </section>
+
+      <nav class="filters" aria-label="分类筛选">
+        <button class="filter active" data-filter="all">全部</button>
+        <button class="filter" data-filter="paper">论文</button>
+        <button class="filter" data-filter="github">GitHub</button>
+        <button class="filter" data-filter="model-release">模型/厂商</button>
+        <button class="filter" data-filter="community">社区</button>
+      </nav>
+
+      <section id="feed" class="feed" aria-live="polite"></section>
+      </section>
+    </main>
+
+    <dialog id="settingsDialog">
+      <form id="settingsForm" method="dialog" class="settings">
+        <header>
+          <h2>设置</h2>
+          <button value="cancel" class="icon-button" aria-label="关闭">×</button>
+        </header>
+        <label>
+          DeepSeek API Key
+          <input id="apiKeyInput" type="password" autocomplete="off" placeholder="sk-..." />
+          <span id="apiKeyHint" class="field-hint">留空表示保留当前 Key</span>
+        </label>
+        <label>
+          DeepSeek 模型
+          <input id="modelInput" type="text" value="deepseek-v4-flash" />
+        </label>
+        <label>
+          GitHub Token
+          <input id="githubTokenInput" type="password" autocomplete="off" placeholder="可选，用于提高限流额度" />
+        </label>
+        <label>
+          排序模式
+          <select id="rankingModeInput">
+            <option value="balanced">均衡</option>
+            <option value="latest">最新</option>
+            <option value="hot">最热</option>
+          </select>
+        </label>
+        <label>
+          最热候选条数
+          <input id="hotCandidateLimitInput" type="number" min="20" max="100" step="1" value="60" />
+          <span class="field-hint">仅用于最热模式，DeepSeek 会逐条评分，最终展示前 20 条</span>
+        </label>
+        <label>
+          配色方案
+          <select id="themeInput">
+            <option value="aurora">极光蓝</option>
+            <option value="graphite">石墨灰</option>
+            <option value="paper">纸本暖白</option>
+            <option value="midnight">午夜紫</option>
+          </select>
+        </label>
+        <footer>
+          <button type="button" id="cancelSettingsButton" class="secondary">取消</button>
+          <button id="saveSettingsButton" type="submit" class="primary">保存</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
