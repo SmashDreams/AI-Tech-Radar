@@ -2,14 +2,41 @@
   "name": "ai-tech-radar",
   "version": "1.0.0",
   "description": "Desktop AI technology radar with DeepSeek summaries and hotness scoring.",
+  "author": "SmashDreams",
   "main": "src/main.js",
   "private": true,
   "type": "commonjs",
   "scripts": {
     "start": "node scripts/start-electron.js",
-    "dev": "node scripts/start-electron.js"
+    "dev": "node scripts/start-electron.js",
+    "dist": "electron-builder --win dir",
+    "dist:installer": "electron-builder --win nsis portable"
+  },
+  "build": {
+    "appId": "com.smashdreams.aitechradar",
+    "productName": "AI Tech Radar",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*",
+      "scripts/**/*",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "devDependencies": {
-    "electron": "^37.2.0"
+    "electron": "^37.2.0",
+    "electron-builder": "^26.8.1"
   }
 }

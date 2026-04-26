@@ -235,14 +235,40 @@ scripts/
 
 ## Release
 
-`v1.0.0` 是当前第一个稳定源码版本。它适合通过源码方式运行：
+`v1.0.0` 是当前第一个稳定源码版本。源码方式运行：
 
 ```bash
 npm install
 npm start
 ```
 
-当前项目还没有加入 `.exe` / `.dmg` / `.AppImage` 打包流程。如果需要面向非开发用户分发，可以后续接入 `electron-builder`。
+生成 Windows 可运行 exe 目录：
+
+```powershell
+npm.cmd run dist
+```
+
+产物会输出到：
+
+```text
+release/
+```
+
+默认命令会生成：
+
+```text
+release/win-unpacked/AI Tech Radar.exe
+```
+
+发布给他人时，需要把整个 `win-unpacked` 文件夹一起压缩分发，不能只复制单个 exe。
+
+如果需要生成安装版和便携版 exe，可以运行：
+
+```powershell
+npm.cmd run dist:installer
+```
+
+安装版会额外下载 NSIS 构建工具，网络不稳定时可能失败。`release/` 已在 `.gitignore` 中，不会被提交到仓库。
 
 ## Notes
 
